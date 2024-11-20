@@ -1,5 +1,10 @@
-$c-white: #f9f5ef;
+$c-white: #fff;
 $c-black: #0f0f0f;
 
 $g-100: #212529;
+
+$blue-100: #4174F6;
+
+$easeInOutQuart: cubic-bezier(0.76, 0, 0.24, 1);
+$transitionVar1: $easeInOutQuart .75s
 

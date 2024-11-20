@@ -1,15 +1,141 @@
 .home {
   width: 100vw;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: VW(10);
+  overflow: hidden;
 
-  .logo {
-    width: VW(580);
-    height: VW(120);
-    position: relative;
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    position: absolute;
+    top: VW(30);
+    left: VW(30);
+    right: VW(30);
+
+    .logo {
+      width: VW(220);
+      height: VW(44);
+      position: relative;
+    }
+
+    .dates {
+      position: relative;
+
+      &:nth-of-type(2) {
+        .date {
+          &:nth-of-type(2) {
+            padding-left: 10vw;
+          }
+        }
+      }
+
+      &_wrapper {
+        display: flex;
+        gap: VW(60);
+      }
+
+      .date {
+        &:nth-of-type(2) {
+          padding-left: 6vw;
+        }
+      }
+    }
+  }
+
+  .about {
+    position: absolute;
+    bottom: VW(30);
+    right: VW(30);
+    left: VW(30);
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    .title {
+      &_top {
+        display: flex;
+        position: relative;
+
+        &_logo {
+          position: relative;
+          width: VW(90);
+          height: VW(33);
+          margin-left: 0.8vw;
+          transform: translateY(-80%);
+        }
+      }
+
+      &_bottom {
+        display: flex;
+      }
+    }
+
+    .button {
+      display: flex;
+      gap: VW(30);
+      opacity: 0;
+      animation: buttonWrapperPresence .5s 1s ease forwards;
+      
+      .icon {
+        width: VW(60);
+        height: VW(60);
+        rotate: 45deg;
+        animation: buttonIconPresence .5s 1.2s $easeInOutQuart forwards;
+      }
+    }
+  }
+
+  .perseverance {
+    position: absolute;
+    bottom: VW(200);
+    right: VW(450);
+    width: VW(320);
+
+    display: flex;
+    flex-direction: column;
+    gap: VW(24);
+  }
+
+  .line {
+    position: absolute;
+    bottom: 20vh;
+    left: 0;
+    z-index: -1;
+
+    width: 100vw;
+    height: VW(658);
+
+    stroke-dasharray: 6000;
+    stroke-dashoffset: -5500;
+    animation: drawPath 5s 0.5s cubic-bezier(0.6, -0.01, 0.33, 1) forwards;
+  }
+}
+
+@keyframes drawPath {
+  from {
+    stroke-dashoffset: -5500;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes buttonWrapperPresence {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes buttonIconPresence {
+  0% {
+    rotate: 45deg;
+  }
+  100% {
+    rotate: 0deg;
   }
 }

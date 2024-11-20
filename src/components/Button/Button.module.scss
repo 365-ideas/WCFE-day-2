@@ -1,0 +1,50 @@
+.button {
+  // background-color: $blue-100;
+  color: $c-white;
+  padding: VW(20) VW(90);
+  // border-radius: VW(6);
+  font-size: VW(30);
+  line-height: 100%;
+  display: block;
+  position: relative;
+  
+  .bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: $blue-100;
+    border-radius: VW(6);
+    transition: scale $transitionVar1;
+  }
+
+
+  @include hover {
+    .bg {
+      scale: 0.95;
+    }
+
+    .char {
+      transform: translateY(-100%);
+    }
+  }
+
+  .textWrapper {
+    height: VW(32);
+    display: flex;
+    text-shadow: 0 VW(32) 0;
+    overflow-y: clip;
+
+    .word {
+      display: flex;
+
+      &:not(.word:nth-of-type(1)) {
+        margin-left: 0.5vw;
+      }
+    }
+
+    .char {
+      display: inline-block;
+      transition: transform $transitionVar1;
+    }
+  }
+}

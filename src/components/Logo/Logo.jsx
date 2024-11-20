@@ -29,3 +29,16 @@ export const LogoSmall = ({...rest}) => {
     </motion.div>
   )
 }
+
+export const LogoHD = ({...rest}) => {
+  return (
+    <motion.div {...rest}>
+      <Image
+        src="/images/HDLogo.svg"
+        fill
+        alt="logo"
+        style={{ objectFit: 'contain' }}
+      />
+    </motion.div>
+  )
+}

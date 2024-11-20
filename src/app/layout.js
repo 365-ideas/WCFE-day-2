@@ -4,36 +4,24 @@ import "@/styles/reset.scss";
 import { LoaderProvider } from "@/providers/LoaderProvider/LoaderProvider";
 import { Root } from "./root";
 
-const inter = localFont({
-  src: [
-    {
-      path: './fonts/Inter_Regular.ttf',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: './fonts/Inter_ExtraBold.ttf',
-      weight: '800',
-      style: 'normal',
-    },
-    {
-      path: './fonts/Inter_Bold.ttf',
-      weight: '700',
-      style: 'normal',
-    }
-  ],
-  variable: '--font-inter'
-});
+import { Roboto } from "next/font/google"
+
+const roboto = Roboto({
+  weight: ['400', '700'],
+  style: ['normal'],
+  subsets: ['latin'],
+  variable: '--font-roboto',
+})
 
 export const metadata = {
-  title: "We'a Creating For Emotions",
-  description: "We'a Creating For Emotions | Project #",
+  title: "We're Creating For Emotions | Project #2",
+  description: "365 Design Perseverance | 365 Ideas",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html className="html" lang="en">
-      <body className={`body ${inter.variable}`}>
+      <body className={`body ${roboto.variable}`}>
         <LoaderProvider>
           <Root>
             {children}
