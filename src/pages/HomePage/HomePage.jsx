@@ -10,11 +10,69 @@ import { anim, LoaderAnim, presenceAnim, TitlePresence } from "@/helpers/anim";
 import { LayoutGroup, motion, useAnimation } from "framer-motion";
 import { ease } from "@/helpers/ease";
 
+const formatTime = (date) => {
+  return date.toLocaleTimeString("en-US", {
+    hour12: false,
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  });
+};
+
+const formatDate = (date) => {
+  return date
+    .toLocaleDateString("en-US", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "2-digit",
+    })
+    .replace(/\//g, ".");
+};
+
 export default function HomePage() {
   const { loaderFinished, setLoaderFinished } = useContext(LoaderContext);
   const [logoAnim, setLogoAnim] = useState(false);
   const lineRef = useRef();
   const controls = useAnimation();
+
+  const timeRef = useRef(null);
+  const dateRef = useRef(null);
+  const rafRef = useRef(null);
+  const rafDateRef = useRef(null);
+
+  const updateTime = () => {
+    const now = new Date();
+    if (timeRef.current) {
+      timeRef.current.textContent = now.toLocaleTimeString("en-US", {
+        hour12: false,
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      });
+    }
+    rafRef.current = requestAnimationFrame(updateTime);
+  };
+  
+  const updateDate = () => {
+    const now = new Date();
+    if (dateRef.current) {
+      dateRef.current.textContent = now.toLocaleDateString('en-US', {
+        day: '2-digit',
+        month: '2-digit',
+        year: '2-digit'
+      }).replace(/\//g, '.');
+    }
+    rafDateRef.current = requestAnimationFrame(updateDate);
+  };
+  
+  useEffect(() => {
+    rafRef.current = requestAnimationFrame(updateTime);
+    rafDateRef.current = requestAnimationFrame(updateDate);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      if (rafDateRef.current) cancelAnimationFrame(rafDateRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     const strokeStart = -5500;
@@ -48,7 +106,11 @@ export default function HomePage() {
     <LayoutGroup type="crossfade">
       <div className={s.home}>
         {!logoAnim && (
-          <Logo className={`${s.logo} ${s.logo_big}`} layoutId="logo" {...anim(LoaderAnim.logo)} />
+          <Logo
+            className={`${s.logo} ${s.logo_big}`}
+            layoutId="logo"
+            {...anim(LoaderAnim.logo)}
+          />
         )}
         <div className={s.top}>
           {logoAnim && (
@@ -63,12 +125,19 @@ export default function HomePage() {
           )}
           <div className={s.dates_wrapper}>
             <div className={s.dates}>
-              <h1 className={s.date}>
-                <Paragraph text="01:12:47" />
-              </h1>
-              <h1 className={s.date}>
-                <Paragraph text="14.24.21" index={1} />
-              </h1>
+              <motion.h1
+                {...presenceAnim(TitlePresence, loaderFinished)}
+                custom={{ id: 1, duration: 1 }}
+                className={s.date}
+                ref={(el) => (timeRef.current = el)}
+              />
+              <motion.h1
+                {...presenceAnim(TitlePresence, loaderFinished)}
+                custom={{ id: 2, duration: 1 }}
+                className={s.date}
+                ref={(el) => (dateRef.current = el)}
+              />
+                {/* <Paragraph text="14.24.21" index={1} /> */}
             </div>
             <div className={s.dates}>
               <h1 className={s.date}>
