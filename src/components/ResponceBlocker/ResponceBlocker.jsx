@@ -1,3 +1,5 @@
+"use client"
+
 import useIsDesktop from "@/helpers/useIsDesktop";
 import React from "react";
 

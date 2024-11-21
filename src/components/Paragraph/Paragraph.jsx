@@ -11,23 +11,6 @@ const Paragraph = ({ text, index = 0, duration = 1 }) => {
 
   const { loaderFinished } = useContext(LoaderContext);
 
-  // return (
-  //   <SplitText
-  //     LineWrapper={({ lineIndex, children }) => (
-  //       <motion.p
-  //         {...presenceAnim(TitlePresence, loaderFinished)}
-  //         custom={{ id: lineIndex + index, duration }}
-  //         className="wrapper"
-  //         // onAnimationComplete={() => setIsAnimationEnded(true)}
-  //       >
-  //         {children}
-  //       </motion.p>
-  //     )}
-  //   >
-  //     {text}
-  //   </SplitText>
-  // );
-
   return (
     <>
       {!isAnimationEnded ? (

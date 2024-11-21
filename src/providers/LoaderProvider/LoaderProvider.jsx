@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const LoaderContext = createContext({
   loaderFinished: false,
@@ -8,12 +8,16 @@ export const LoaderContext = createContext({
 });
 
 export const LoaderProvider = ({ children }) => {
-  const [loaderFinished, setLoaderFinished] = useState(true);
-  // const [loaderFinished, setLoaderFinished] = useState(false);
+  const [loaderFinished, setLoaderFinished] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <LoaderContext.Provider value={{ loaderFinished, setLoaderFinished }}>
-      {children}
+      {mounted ? children : null}
     </LoaderContext.Provider>
   );
 };

@@ -2,16 +2,17 @@ import { useContext } from "react";
 import localFont from "next/font/local";
 import "@/styles/reset.scss";
 import { LoaderProvider } from "@/providers/LoaderProvider/LoaderProvider";
-import { Root } from "./root";
 
-import { Roboto } from "next/font/google"
+import { Roboto } from "next/font/google";
+import { ResponceBlocker } from "@/components/ResponceBlocker/ResponceBlocker";
+import { AnimatePresence } from "framer-motion";
 
 const roboto = Roboto({
-  weight: ['400', '700'],
-  style: ['normal'],
-  subsets: ['latin'],
-  variable: '--font-roboto',
-})
+  weight: ["400", "700"],
+  style: ["normal"],
+  subsets: ["latin"],
+  variable: "--font-roboto",
+});
 
 export const metadata = {
   title: "We're Creating For Emotions | Project #2",
@@ -23,9 +24,8 @@ export default function RootLayout({ children }) {
     <html className="html" lang="en">
       <body className={`body ${roboto.variable}`}>
         <LoaderProvider>
-          <Root>
-            {children}
-          </Root>
+          <ResponceBlocker />
+          <AnimatePresence mode="wait">{children}</AnimatePresence>
         </LoaderProvider>
       </body>
     </html>

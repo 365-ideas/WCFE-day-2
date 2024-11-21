@@ -28,7 +28,7 @@ export const TitlePresence = {
     transition: {
       duration,
       ease: ease.outExpo,
-      delay: (id + 1) * 0.1,
+      delay: ((id + 1) * 0.1),
     },
     transitionEnd: {
       clipPath: "none",
@@ -42,21 +42,6 @@ export const TitlePresence = {
 }
 
 export const LoaderAnim = {
-  wrapper: {
-    initial: {
-      opacity: 1
-    },
-    animate: {
-      opacity: 1,
-    },
-    exit: {
-      opacity: 0,
-      transition: {
-        delay: 1,
-        duration: .5,
-      }
-    }
-  },
   logo: {
     initial: {
       opacity: 0,
